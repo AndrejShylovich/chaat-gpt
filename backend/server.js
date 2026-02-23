@@ -15,8 +15,8 @@ const client = new OpenAI({
 
 app.post("/api/chat", async (req, res) => {
   try {
-    
     const { message } = req.body;
+    console.log(message);
     if (!message) {
       return res.status(400).json({ error: "Message is required" });
     }
@@ -25,11 +25,11 @@ app.post("/api/chat", async (req, res) => {
       model: "gpt-5-mini",
       input: message,
     });
+    console.log(response);
 
     const reply =
-      response.output?.[0]?.content?.[0]?.text ||
-      "Пустой ответ модели";
-
+      response.output?.[0]?.content?.[0]?.text || "Пустой ответ модели";
+    console.log(reply);
     res.json({ reply });
   } catch (err) {
     console.error(err);
